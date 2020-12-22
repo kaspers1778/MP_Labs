@@ -6,7 +6,6 @@ Code:
 neighbor(X, Y, List) :- nextto(X, Y, List).
 neighbor(X, Y, List) :- nextto(Y, X, List) .
 where_is_fish(R) :-
-   /* 0. Всего 5 домов */
     Houses = [_,_,_,_,_],
     nth1(1, Houses, [norwegian,_,_,_,_]),
     member([englishman,_,_,_,red], Houses),
