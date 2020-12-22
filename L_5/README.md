@@ -292,29 +292,9 @@ CLIPS> (assert (cold))
 CLIPS> (assert (rain))
 <Fact-4>
 CLIPS> (run)
-
-CLIPS> (assert (Last 7 days))
-<Fact-1>
-CLIPS> (assert (0%))
-<Fact-2>
-CLIPS> (assert (cold))
-<Fact-3>
-CLIPS> (assert (rain))
-<Fact-4>
-CLIPS> (run)
 ```
 Result:
 ```
-CLIPS> (assert (Last 7 days))
-<Fact-1>
-CLIPS> (assert (0%))
-<Fact-2>
-CLIPS> (assert (cold))
-<Fact-3>
-CLIPS> (assert (rain))
-<Fact-4>
-CLIPS> (run)
-
 It's cold and rainy outside
 
 Not a lot of time to rest
