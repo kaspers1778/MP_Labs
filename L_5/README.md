@@ -237,7 +237,7 @@ Code:
 Code:
 ```
 (clear)
-(load "D:/Новая папка(3)/Lab5/lab5_rules.clp")
+(load "C:/Users/Петя/Documents/Prolog/L_5/lab5_rules.clp")
 ```
 3.Testing:
 Code:
