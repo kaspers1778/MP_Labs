@@ -33,37 +33,37 @@ R = german
 2.Create magic squares by size.
 Code:
 ```
-create_matrix(0, _, []).
-create_matrix(N0, N, [Zeile|Matrix]) :-
+create_m(0, _, []).
+create_m(N0, N, [Head|M]) :-
     N0 > 0,
     N1 is N0 - 1,
-    length(Zeile, N),
-    create_matrix(N1, N, Matrix).
+    length(Head, N),
+    create_m(N1, N, M).
 
-sum_row([], _).
-sum_row([Row|Matrix], SumDim) :-
-    sum(Row, #=, SumDim),
-    sum_row(Matrix, SumDim).
+row_sum([], _).
+row_sum([Row|M], Sum) :-
+    sum(Row, #=, Sum),
+    row_sum(M, Sum).
 
 diagonal([], _, _, []).
-diagonal([Row|Matrix], Idx, P, [X|ListeDiag]) :-
+diagonal([Row|M], Idx, P, [X|Ds]) :-
     nth1(Idx, Row, X),
     Idx1 is Idx+P,
-    diagSum(Matrix, Idx1, P, ListeDiag).
+    diagonal(M, Idx1, P, Ds).
 
-magic_square(N, Matrix) :-
+magic_square(N, M) :-
     Nmax is N * N,
-    SumDim is N * (N * N + 1) / 2,
-    create_matrix(N, N, Matrix),
-    flatten(Matrix, Vars),
+    Sum is N * (N * N + 1) / 2,
+    create_m(N, N, M),
+    flatten(M, Vars),
     Vars ins 1..Nmax,
-    sum_row(Matrix, SumDim),
-    transpose(Matrix, TransMat),
-    sum_row(TransMat, SumDim),
-    diagonal(Matrix, N, -1, D1),
-    sum(D1, #=, SumDim),
-    diagonal(Matrix, 1, +1, D2),
-    sum(D2, #=, SumDim),
+    row_sum(M, Sum),
+    transpose(M, TransM),
+    row_sum(TransM, Sum),
+    diagonal(M, N, -1, D1),
+    sum(D1, #=, Sum),
+    diagonal(M, 1, +1, D2),
+    sum(D2, #=, Sum),
     all_different(Vars),
     label(Vars).
 ```
@@ -90,7 +90,7 @@ blocks([N1,N2,N3|Ns1], [N4,N5,N6|Ns2], [N7,N8,N9|Ns3]) :-
     all_distinct([N1,N2,N3,N4,N5,N6,N7,N8,N9]),
     blocks(Ns1, Ns2, Ns3).
 
-problem(1,[
+sudoku1(1,[
 [_,_,3,_,_,8,_,_,6],
 [_,_,_,4,6,_,_,_,_],
 [_,_,_,1,_,_,5,9,_],
@@ -104,7 +104,7 @@ problem(1,[
 ```
 Result:
 ```
-problem(1,R), sudoku(R), maplist(portray_clause,R).
+sudoku1(1,R), sudoku(R), maplist(portray_clause,R).
 [1, 7, 3, 9, 5, 8, 4, 2, 6].
 [9, 5, 2, 4, 6, 3, 7, 8, 1].
 [8, 4, 6, 1, 2, 7, 5, 9, 3].
